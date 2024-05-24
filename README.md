@@ -13,5 +13,7 @@ Por último, existe una relación de composición representada por la línea con
 
 ## Cómo ejecutar el programa
 Para poder ejecutar el programa, se deberán ingresar los siguientes textos en la terminal: 
+
 g++ main.cpp -o main
+
 ./main

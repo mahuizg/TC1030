@@ -24,7 +24,10 @@ public:
     char getSexo() { return sexo; }
     string getRaza() { return raza; }
     string getColor() { return color; }
+    virtual void agradecerDonacion(float donacion) = 0; //Igualo este método a 0, con la intención de declarar esta como mi clase abstracta
+    //De igual manera, uso virtual en este método para poder emplear sobreescritura de métodos más adelante
     virtual ~Animal() {} //Esta línea define un destructor virtual, de manera que se destruyan los objetos de tipo Animal (y aquellos creados mediante la herencia que Animal tiene sobre Perro y Gato). 
+     
 };
 
 Animal::Animal(int id_, string tipo_, string nombre_, int edad_, char sexo_, string raza_, string color_){
@@ -58,6 +61,9 @@ public:
     }
     bool getEntrenado() { return entrenado; }
     string getEntrenador() { return entrenador; }
+    void agradecerDonacion(float donacion) override{ //Uso override para declarar que aquí habrá sobreescritura de métodos. (INTERFACES)
+        cout << "¡Woof! Agradecemos tu donación de $" << donacion << endl;
+    }
 };
 
 class Gato : public Animal {
@@ -69,6 +75,9 @@ public:
         independencia = independencia_;
     }
     int getIndependencia() { return independencia; }
+    void agradecerDonacion(float donacion) override { //Nuevamente, aquí habra sobreescritura de métodos, y aunque el nombre del método y el parámetro sea exactamente igual al contenido en la clase Perro, ambos desplegarán algo diferente. (INTERFACES)
+        cout << "¡Miau! Agradecemos tu donación de $"<< donacion << endl; 
+    }
 };
 
 #endif

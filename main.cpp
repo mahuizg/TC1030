@@ -30,7 +30,8 @@ int menu(){
         cout << "1. Ver animales" << endl;
         cout << "2. Agregar animal" << endl;
         cout << "3. Eliminar animal" << endl;
-        cout << "4. Salir" << endl;
+        cout << "4. Realizar una donación" << endl; 
+        cout << "5. Salir" << endl;
         cout << endl;
         cout << "Selecciona una opción: " << endl;
         cin >> opcion; //Solicito una entrada al usuario para poder indicarle al código qué funciones ejecutar.
@@ -103,8 +104,48 @@ int menu(){
             cin >> indice; 
             refugio.eliminarAnimal(indice);
         }
+        
+        else if (opcion == 4){
+            int animalDonacion;
+            cout << "¿Para qué animales deseas hacer la donación?" << endl; 
+            cout << "1. Perros" << endl; 
+            cout << "2. Gatos" << endl; 
+            cin >> animalDonacion;
+            float donacion;
+            cout << "Ingresa el monto que desees donar: " << endl; 
+            cin >> donacion; 
+            int contador; 
+            contador = 0;
+            int condicion;  
+            condicion = 0;
+            continue; //Tengo que arreglar las siguientes líneas de código, pero aquí llamare a los métodos que fueron heredados y sobreescritos de la clase abstracta.  (INTERFACES)
+            //if(animalDonacion == 1){
+                //while (condicion == 0){
+                    //if (Perro *perro = dynamic_cast<Perro *>(animales[contador])) {//Si el puntero en esta línea apunta a un objeto tipo Perro, la condición será verdadera, y ejecutará las siguientes líneas de código. 
+                        //animales[contador]->agradecerDonacion(donacion); 
+                        //contador = contador + 1; 
+                        //condicion = 1;
+                    //}
+                    //else{
+                       // contador = contador + 1;
+                    //}
+                //}
+            //}
 
-        else if (opcion == 4){ //Esta condicional se despide del usuario y finalmente rompe el ciclo que hacía que el menú se desplegará hasta qeu el usuario solicitara salir. 
+            //else if (animalDonacion == 2){ 
+                //while (condicion == 0){
+                    //if (Gato *gato = dynamic_cast<Gato *>(animales[contador])) {//Si el puntero en esta línea apunta a un objeto tipo Gato, la condición será verdadera, y ejecutará las siguientes líneas de código. 
+                        //animales[contador]->agradecerDonacion(donacion); 
+                        //contador = contador + 1; 
+                        //condicion = 1;
+                //}
+                //else{
+                    //contador = contador + 1;
+                //}
+            //}
+        }
+
+        else if (opcion == 5){ //Esta condicional se despide del usuario y finalmente rompe el ciclo que hacía que el menú se desplegará hasta qeu el usuario solicitara salir. 
             cout << endl;
             cout << "Hasta luego" << endl;
             cout << endl;
@@ -116,7 +157,7 @@ int menu(){
         }
     }
     return 0;
-}
+};
 
 int main(){ //Dentro de mi función main, llamo a la función que me ayudará a inicializar todos los objetos de tipo Animal. De igual manera, llamo a la función que desplega el menú. 
     initAnimales();

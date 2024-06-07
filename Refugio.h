@@ -8,7 +8,7 @@
 using namespace std;
 
 class Refugio{
-private:
+public:
     Animal *animales[1000]; //Creo un arreglo que contendrá objetos de tipo Animal. Debo establecer un tamaño inicial, por lo le daré una longitud de 1000. De igual manera emplearé apuntadores de tipo animal para usar polimorfismo. 
 
 public:
@@ -32,6 +32,7 @@ public:
         int i; 
         i = 1;
         while (animales[i] != nullptr){//Debido a que el número de animales irá variando, será más útil usar un ciclo while que un ciclo for
+        //AQUI TENGO QUE VER LA MANERA DE TENER UN CICLO WHILE PARA IMPRIMIR TODOS LOS ANIMALES, PERO DENTRO DEL CICLO, TENGO QUE USAR UN IF ANIMALES[I] != NULLPTR
         //Utilizo apuntadores para obtener cada uno de los atributos de cualquier animal, pues con la función mostrarAnimales(), busco imprimir toda esta información para cada uno de ellos.
             cout << endl;
             cout << "Número de ID: " << animales[i]->getId() << endl;

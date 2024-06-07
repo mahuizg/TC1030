@@ -4,6 +4,9 @@ El objetivo del programa que crearé durante las cinco semanas que corresponden 
 
 El objetivo es que, al ejecutar el programa, se despliegue un menú en el que el usuario pueda seleccionar entre registrar un animal, dar de baja a un animal, o desplegar la información de los animales. Análogamente, si el usuario opta por desplegar los datos de los animales del refugio, se le dará la opción de visualizar perros o gatos.
 
+## Nota de las actualizaciones
+Al inicio del semestre, no sabía que debíamos actualizar los archivos en lugar de eliminar, y volver a subirlos cada que hiciéramos cambios, por lo que en las primeras entregas, habrán muchos "Delete [nombredelarchivo]". No obstante, en cuanto supe que era importante actualizar, dejé de eliminar los archivos, y para las últimas entregas, ya podremos ver "Update [nombredelarchivo]". 
+
 ## Casos en los que el programa dejaría de funcionar
 Debido a que la intención es poder implementar un menú con distintas opciones para que el usuario seleccione, el programa deberá recibir una entrada. El programa fallará si el usuario intenta ingresar una cadena de texto, pues las opciones disponibles serán únicamente números enteros. 
 

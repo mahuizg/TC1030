@@ -28,35 +28,7 @@ public:
         }
     }
 
-    void mostrarAnimales(){
-        int i; 
-        i = 1;
-        while (animales[i] != nullptr){//Debido a que el número de animales irá variando, será más útil usar un ciclo while que un ciclo for
-        //AQUI TENGO QUE VER LA MANERA DE TENER UN CICLO WHILE PARA IMPRIMIR TODOS LOS ANIMALES, PERO DENTRO DEL CICLO, TENGO QUE USAR UN IF ANIMALES[I] != NULLPTR
-        //Utilizo apuntadores para obtener cada uno de los atributos de cualquier animal, pues con la función mostrarAnimales(), busco imprimir toda esta información para cada uno de ellos.
-            cout << endl;
-            cout << "Número de ID: " << animales[i]->getId() << endl;
-            cout << "Nombre: " << animales[i]->getNombre()<< endl;
-            cout << "Tipo de animal: " << animales[i]->getTipo() << endl;
-            cout << "Edad: " << animales[i]->getEdad() << endl;
-            cout << "Sexo: " << animales[i]->getSexo() << endl;
-            cout << "Raza: " << animales[i]->getRaza() << endl;
-            cout << "Color: " << animales[i]->getColor() << endl;
 
-            if (Perro *perro = dynamic_cast<Perro *>(animales[i])) { //Si el puntero en esta línea apunta a un objeto tipo Perro, la condición será verdadera, y ejecutará las siguientes líneas de código. 
-                cout << "Entrenado: " << perro->getEntrenado() << endl; //Entrenado es un atributo que declaré como propio de un perro, pero no de un gato
-                if (perro->getEntrenado() == true){ //De igual manera, establezco una condición, para que, si el perro sí está entrenado, entonces también se imprima el nombre del entrenador. En caso de no estar entrenado, este último cout no se ejecutará- 
-                    cout << "Entrenador: " << perro->getEntrenador() << endl;
-                }
-            }
-            else if (Gato *gato = dynamic_cast<Gato *>(animales[i])){ //Esta línea de código funciona similar a la de la línea 40. Si nuestro apuntador nos lleva a un objeto de clase Gato, la siguientes línea de código se ejecutará, la cual contiene un atributo propio únicamente de los gatos. 
-                cout << "Nivel de Independencia (1-10): " << gato->getIndependencia() << endl;
-            }
-        i = i + 1;
-        }
-    }
-
-    ~Refugio(){};
 };
 
 #endif

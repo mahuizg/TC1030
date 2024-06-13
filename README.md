@@ -20,3 +20,7 @@ Para poder ejecutar el programa, se deberán ingresar los siguientes textos en l
 g++ main.cpp -o main
 
 ./main
+
+## Referencias
+1. Ravikiran, A. S. (2023). An Introduction to C++ Getline with Syntax And Examples. Simplilearn. Recuperado el 12 de junio del 2024, de: https://www.simplilearn.com/tutorials/cpp-tutorial/cpp-getline#:~:text=Example%3A%20Using%20cin%20Object&text=That's%20because%20the%20compiler%20stopped,to%20use%20the%20getline%20function.
+

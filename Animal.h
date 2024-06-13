@@ -24,9 +24,8 @@ public:
     char getSexo() { return sexo; }
     string getRaza() { return raza; }
     string getColor() { return color; }
-    virtual void agradecerDonacion(float donacion) = 0; //Igualo este método a 0, con la intención de declarar esta como mi clase abstracta
+    virtual void mostrarAnimales() = 0; //Igualo este método a 0, con la intención de declarar esta como mi clase abstracta
     //De igual manera, uso virtual en este método para poder emplear sobreescritura de métodos más adelante
-    virtual ~Animal() {} //Esta línea define un destructor virtual, de manera que se destruyan los objetos de tipo Animal (y aquellos creados mediante la herencia que Animal tiene sobre Perro y Gato). 
      
 };
 
@@ -60,9 +59,26 @@ public:
         entrenador = entrenador_;
     }
     bool getEntrenado() { return entrenado; }
+
     string getEntrenador() { return entrenador; }
-    void agradecerDonacion(float donacion) override{ //Uso override para declarar que aquí habrá sobreescritura de métodos. (INTERFACES)
-        cout << "¡Woof! Agradecemos tu donación de $" << donacion << endl;
+
+    void mostrarAnimales(){
+        for (int i = 0; animales.size(); i+1){
+            if (animales[i] != nullptr && animales[i]-> getTipo() == "Perro"){
+                cout << endl;
+                cout << "Número de ID: " << animales[i]->getId() << endl;
+                cout << "Nombre: " << animales[i]->getNombre()<< endl;
+                cout << "Tipo de animal: " << animales[i]->getTipo() << endl;
+                cout << "Edad: " << animales[i]->getEdad() << endl;
+                cout << "Sexo: " << animales[i]->getSexo() << endl;
+                cout << "Raza: " << animales[i]->getRaza() << endl;
+                cout << "Color: " << animales[i]->getColor() << endl;
+                cout << "Entrenado: " << perro->getEntrenado() << endl;
+                if (perro->getEntrenado == True){
+                    cout << "Entrenador: " << perro->getEntrenador() << endl;
+                }
+            }
+        }
     }
 };
 
@@ -75,9 +91,21 @@ public:
         independencia = independencia_;
     }
     int getIndependencia() { return independencia; }
-    void agradecerDonacion(float donacion) override { //Nuevamente, aquí habra sobreescritura de métodos, y aunque el nombre del método y el parámetro sea exactamente igual al contenido en la clase Perro, ambos desplegarán algo diferente. (INTERFACES)
-        cout << "¡Miau! Agradecemos tu donación de $"<< donacion << endl; 
-    }
+    void mostrarAnimales(){
+        for (int i = 0; animales.size(); i+1){
+            if (animales[i] != nullptr && animales[i]-> getTipo() == "Gato"){
+                cout << endl;
+                cout << "Número de ID: " << animales[i]->getId() << endl;
+                cout << "Nombre: " << animales[i]->getNombre()<< endl;
+                cout << "Tipo de animal: " << animales[i]->getTipo() << endl;
+                cout << "Edad: " << animales[i]->getEdad() << endl;
+                cout << "Sexo: " << animales[i]->getSexo() << endl;
+                cout << "Raza: " << animales[i]->getRaza() << endl;
+                cout << "Color: " << animales[i]->getColor() << endl;
+                cout << "Nivel de Independencia: " << gato->getIndependencia() << endl;
+                }
+            }
+        }    
 };
 
 #endif

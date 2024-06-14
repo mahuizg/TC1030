@@ -100,7 +100,8 @@ public:
         cout << "Raza: " << raza << endl; 
         cout << "Color: " << color << endl; 
         cout << "Tamaño: " << tamanio << endl; 
-        cout << "Entrenado: " << entrenado << endl; 
+        cout << "Entrenado: " << entrenado << endl;
+        // 0 es false y 1 es true
         if (entrenado == true){
             cout << "Entrenador/a: " << entrenador << endl;
         }

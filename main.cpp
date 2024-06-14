@@ -1,7 +1,14 @@
-//TEMAS A RESOLVER: 
-// 1 - Cuando imprimo los animales, donde dice "Entrenado: " ahora regresa un 1 esté el perro entrenado o no
-// 2 - ¿Por qué se está imprimiendo "Entrenador: " incluso cuando el perro no está etrenado. Creo que esto tiene que ver con el error 1. 
-// 3 - Tengo que seguir haciendo modificaciones en registrarAnimal()
+/**
+ * Proyecto Refugio main
+ * María José Zamora
+ * A01704264
+ * 14 de junio del 2024
+ * Versión 5
+ * Este es un programa pensado para usarse en refugios de animales. El ob-
+ * jetivo es permitir al usuario observar la lista de animales que se 
+ * encuentran en el refugio, al igual que registrar más animales, o dar de
+ * baja a otros que hayan sido adoptados. 
+ */
 
 #include "Refugio.h"
 #include "Animal.h"
@@ -9,12 +16,41 @@
 
 using namespace std;
 
-Refugio refugio;
-int menu(){
+Refugio refugio; //Creo mi objeto de tipo refugio para acceder a sus métodos
+
+/**
+ * Esta función crea objetos de tipo Animal. A su vez, usaré el método
+ * registrarAnimal() para ingresarlos al arreglo animales[]. 
+ * @param 
+ * @return
+ */
+void initAnimales(){
+    refugio.registrarAnimal(1, "Perro", "Miguel Bosé", 3, 'M', "Pug", "Beige", 
+    "Chico", true, "Jaime", 0);
+    refugio.registrarAnimal(2, "Perro", "Pepa", 10, 'H', "Beagle","Blanco con café",
+    "Mediano", false, "", 0);
+    refugio.registrarAnimal(3, "Perro", "Raúl", 9, 'M', "Airedale Terrier", 
+    "Café con negro", "Grande", true, "Jimena", 0);
+    refugio.registrarAnimal(4, "Gato", "Bernarda", 2, 'H', "Bombay", "Negro", "",
+    false, "", 9);
+    refugio.registrarAnimal(5, "Gato", "Pate", 7, 'M', "Siberiano", "Gris", "", 
+    false, "", 4);
+}
+
+/**
+ * Esta función desplegará el menú principal que permitirá al usuario decidir qué
+ * hacer dentro del programa. Solicitaré una elección, y dependiendo de esta, 
+ * indicaré al programa qué ejecutar. 
+ * @param
+ * @return un 0
+ */
+void menu(){
     int opcion;
-    bool continua; //Establezco una variable booleana con un valor inciial de true para que el menu se despliegue una y otra vez mientras el usuario no escoga la opción para salir.
+    bool continua; 
+    //Establezco una variable con un valor de true para desplegar el menú en loop.
+    //Este ciclo se romperá hasta que el usuario decida salir
     continua = true;
-    while (continua == true){ //Las siguientes líneas imprimen los textos necesarios para mi menú inicial
+    while (continua == true){
         cout << endl;
         cout << "Bienvenido" << endl;
         cout << "1. Ver animales" << endl;
@@ -23,20 +59,31 @@ int menu(){
         cout << "4. Salir" << endl;
         cout << endl;
         cout << "Selecciona una opción: " << endl;
-        cin >> opcion; //Solicito una entrada al usuario para poder indicarle al código qué funciones ejecutar.
-        if (opcion == 1){ // Si el usuario desea ver los animales, llamaré el método mostrarAnimales() el cual pertenece a la clase Refugio, y cuya lógica see encuentra en el archivo Refugio.h
-            perro.mostrarAnimales();
-            gato.mostrarAnimales()
+        cin >> opcion;
+
+        if (opcion == 1){
+            refugio.mostrarAnimales();
         }
 
         else if (opcion == 2){ 
-            cout << "¿Cuál es el número de ID del animal que quieres dar de alta?: " << endl; //QUIERO QUE EL ID SE ASIGNE EN AUTOMATICO USANDO EL ATRIBUTO DE ANIMALESREGISTRADOS DE REFUGIO PARA EVITAR LA SOBREESCRITURA
+            cout << endl; 
+            cout << "¿Cuál es el número de ID del animal?: " << endl;
+            //La siguiente línea recomienda un ID en base a la cantidad de 
+            //animales que estén/hayan estado registrados en el refugio.
+            //La intención es que el usuario sepa que ID usar para evitar
+            //sobreescribir animales con el mismo ID, y también para que
+            //no se pueda repetir el uso de ningún ID que haya sido 
+            //asignado anteriormente.
+            cout << "ID recomendado: " << refugio.getCantidadA() + 1 << endl; 
             int id; 
             cin >> id;
+            cin.ignore();
             cout << endl; 
-            cout << "¿Qué tipo de animal es? Escribe el tipo de animal con la primera letra mayúscula únicamente y sin espacios al final: ";
+            cout << "¿Qué tipo de animal es?"<< endl;
+            cout << "Escribe la primera letra en mayúscula: "<< endl;
             string tipo; 
             cin >> tipo; 
+            cin.ignore();
             cout << endl; 
             cout << "¿Cuál es el nombre del animal?: " << endl; 
             string nombre; 
@@ -45,10 +92,13 @@ int menu(){
             cout << "¿Cuántos años tiene el animal?: " << endl; 
             int edad; 
             cin >> edad; 
+            cin.ignore();
             cout << endl; 
-            cout << "¿Cuál es su sexo? Asegúrate de ingresar únicamente un caracter (H para hembra, M para macho): " << endl;
+            cout << "¿Cuál es su sexo? Ingresa únicamente un caracter" << endl;
+            cout << "H para hembra, M para macho: " << endl;
             char sexo; 
             cin >> sexo; 
+            cin.ignore();
             cout << endl; 
             cout << "¿Cuál es la raza del animal?: " << endl;
             string raza; 
@@ -58,17 +108,21 @@ int menu(){
             string color; 
             getline(cin, color);
             cout << endl;
-            cout << "Si el animal es un gato, simplemente ingresa NA" << endl; 
-            cout << "Si el animal es un perro, ¿su tamaño es chico, mediano, o grande? Recuerda ingresar tu respuesta en una sola palabra sin espacios y con la primera letra en mayúsculas: "<< endl;
+            cout << "Si el animal es un gato, ingresa NA" << endl; 
+            cout << "¿El tamaño del perro es chico, mediano, o grande?" << endl;
+            cout << "Escribe la primera letra en mayúsculas "<< endl;
             string tamanio; 
             cin >> tamanio; 
+            cin.ignore();
             cout << endl;
             cout << "Si el animal es un gato, ingrese 0" << endl; 
-            cout << "Si el animal es un perro, ¿está entrenado? Escribe 0 si no lo está, o 1 en el caso contrario: " << endl; 
+            cout << "¿El perro está entrenado?" << endl; 
+            cout << "Escribe 0 si no, o 1 en el caso contrario: " << endl; 
             int entrada; 
             cin >> entrada;
+            cin.ignore();
             bool entrenado;
-            if (entrada == 0){
+            if (entrada == 0){ //Utilizo ifs para establecer mis valores booleanos
                 entrenado = false;
             }
             else if (entrada == 1){
@@ -76,40 +130,58 @@ int menu(){
             }
             cout << endl; 
             cout << "Si el animal es un gato, ingrese NA" << endl;
-            cout << "Si el animal es un perro que no esté entrenado, ingresa NA. Si el perro sí está entrenado, ¿cuál es el nombre de su entrenador/a?: " << endl;
+            cout << "Si el perro no está entrenado, ingresa NA." << endl;
+            cout << "Si el perro está entrenado, ¿quién lo entrenó?" << endl; 
             string entrenador;
-            cin >> entrenador; 
+            getline(cin, entrenador);
             cout << endl; 
             cout << "Si el animal es un perro, ingresa 0" << endl; 
-            cout << "Si el animal es un gato, ¿cuál es su nivel de independencia en una escala del 1-10?: " << endl; 
+            cout << "¿Cuál es el nivel de independencia del gato (1-10)?: " << endl; 
             int independencia; 
             cin >> independencia; 
-
-            refugio.registrarAnimal(id, tipo, nombre, edad, sexo, raza, color, tamanio, entrenado, entrenador, independencia);
+            cin.ignore();
+            //Una vez que terminé de recopilar los atributos del animal, ahora accedo al 
+            //método registrarAnimal()
+            refugio.registrarAnimal(id, tipo, nombre, edad, sexo, raza, color,
+            tamanio, entrenado, entrenador, independencia);
         }
 
         else if (opcion == 3){
             cout << "¿Cuál es el id del animal que quieres eliminar?: "<< endl; 
+            //Solicito un índice para saber qué posición del arreglo eliminar
             int indice;
             cin >> indice; 
             refugio.eliminarAnimal(indice);
         }
         
-        else if (opcion == 4){ //Esta condicional se despide del usuario y finalmente rompe el ciclo que hacía que el menú se desplegará hasta qeu el usuario solicitara salir. 
+        else if (opcion == 4){
+            //Esta condicional rompe el ciclo que hacía que el menú se 
+            //desplegará hasta qeu el usuario solicitara salir.  
             cout << endl;
             cout << "Hasta luego" << endl;
             cout << endl;
-            continua = false; //Establecemos la variable continua como falsa para salir del ciclo
+            continua = false; 
+            //Establecemos la variable como falsa para salir del ciclo
         }
 
-        else{ //Esta última condición la escribí en caso de que el usuario escriba cualquier otra opción que no esté contenida en el menú. 
+        else{ 
+            //Esta última condición la escribí en caso de que el usuario escriba
+            //cualquier otra opción que no esté contenida en el menú. 
             cout << "Por favor, selecciona una opción válida" << endl;
         }
     }
-    return 0;
 };
 
-int main(){ //Dentro de mi función main, llamo a la función que me ayudará a inicializar todos los objetos de tipo Animal. De igual manera, llamo a la función que desplega el menú. 
+/**
+ * Este es mi main. Llamaré a la función initAnimales() que crea todos los objetos
+ * de tipo Animal. 
+ * De igual manera llamo a la función que desplegará el menú principal
+ * @param
+ * @return un 0
+ */
+int main(){
+    initAnimales();
     menu();
     return 0;
 }
+

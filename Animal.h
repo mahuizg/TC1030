@@ -1,3 +1,13 @@
+/**
+ * Proyecto Refugio clase Animal
+ * María José Zamora
+ * A01704264
+ * 14 de junio del 2024
+ * Versión 5
+ * Esta clase define los objetos de tipo Animal. Las clases hijas serán Gato y Perro,
+ * las cuales heredarán los atributos de la clase madre. 
+ */
+
 #ifndef ANIMAL_H
 #define ANIMAL_H
 #include <iostream>
@@ -133,3 +143,4 @@ public:
 };
 
 #endif
+

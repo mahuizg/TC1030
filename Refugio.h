@@ -9,26 +9,85 @@ using namespace std;
 
 class Refugio{
 public:
-    Animal *animales[1000]; //Creo un arreglo que contendrá objetos de tipo Animal. Debo establecer un tamaño inicial, por lo le daré una longitud de 1000. De igual manera emplearé apuntadores de tipo animal para usar polimorfismo. 
+    Animal *animales[100]; //Creo un arreglo que contendrá objetos de tipo Animal.
+    //Debo establecer un tamaño inicial, por lo le daré una longitud de 100. 
+    //De igual manera emplearé apuntadores de tipo animal para usar polimorfismo. 
+    int cantidadAnimales; 
 
 public:
+    //GETTER
+    int getCantidadA(){return cantidadAnimales;}
+
+    /**
+     * Este método nos permitirá eliminar un objeto de tipo Animal una vez que 
+     * el usuario nos indique el indice del mismo. De igual manera, asignaremos
+     * un apuntador nulo para indicar que, tras eliminar el animal de algún 
+     * índice, su apuntador ya no apunta a ningún objeto válido. 
+     * @param un entero que nos indique el índice del objeto que el usuario querrá 
+     * eliminar
+     * @return
+     */
     void eliminarAnimal(int indice){
         delete animales[indice];
-        animales[indice] = nullptr; //EL motivo por el cual decidí agregar un apuntador nulo, fue para indicar que, tras eliminar el animal de algún índice, su apuntador ya no apunta a ningún objeto válido. 
+        animales[indice] = nullptr;
     }
 
-    void registrarAnimal(int id, string tipo, string nombre, int edad, char sexo, string raza, string color, string tamanio, bool entrenado, string entrenador, int independencia){ //Establezco todos los parámetros que podrían llegar a usarse para registrar a algún animal, sea este un perro o un gato. 
-        if (tipo == "Perro") //Estableceré una condición que me ayudará a diferenciar entre perros y gatos, pues estos no tienen los mismos atributos.
-        {
-            animales[id] = new Perro(id, tipo, nombre, edad, sexo, raza, color, tamanio, entrenado, entrenador);
+    /**
+     * Este método nos permitirá registrar objetos dentro de nuestro arreglo 
+     * animales[]. Esto sucederá mediante polimorfismo utilizando New. De
+     * igual manera, establezco una condición para saber qué constructor utilizar
+     * dependiendo del tipo de animal. 
+     * @param entero id, string tipo, string nombre, int edad, char sexo, string raza, 
+     * string color, string tamanio, bool entrenado, string entrenador, int
+     * independencia. 
+     * @return
+     */
+    void registrarAnimal(int id, string tipo, string nombre, int edad, char sexo, 
+    string raza, string color, string tamanio, bool entrenado, string entrenador,
+    int independencia){ 
+        if (tipo == "Perro" && entrenado == true){
+            //Si el perro está entrenado, usaremos el constructor que requiere un
+            //atributo entrenador
+            animales[id] = new Perro(id, tipo, nombre, edad, sexo, raza, color, 
+            tamanio, entrenado, entrenador);
+            cantidadAnimales = cantidadAnimales + 1;
         }
-        else if (tipo == "Gato")
-        {
-            animales[id] = new Gato(id, tipo, nombre, edad, sexo, raza, color, independencia);
+
+        else if (tipo == "Perro" && entrenado == false){
+            //Si el perro no está entrenado, usraé el constructor que no requiere
+            //de un atributo entrenador
+            animales[id]= new Perro(id, tipo, nombre, edad, sexo, raza,color,
+            tamanio, entrenado);
+            cantidadAnimales = cantidadAnimales +1;
+        }
+             
+        else if (tipo == "Gato"){
+            //Si el objeto es de tipo Gato, usaré el único constructor que hay
+            //para gatos
+            animales[id] = new Gato(id, tipo, nombre, edad, sexo, raza, color, 
+            independencia);
+            cantidadAnimales = cantidadAnimales+1;
         }
     }
 
-
+    /**
+     * Este método me ayudará a imprimir la información de cada uno de mis objetos
+     * de tipo animal. Para esto, me apoyaré de un ciclo for que se iterará 100
+     * veces, pues este es el límite de mi arreglo animales[]. De igual manera,
+     * estableceré una condición para que se impriman todos los índices del
+     * arreglo siempre y cuando estos no sean un apuntador nulo. 
+     * Dentro de mi if, utilizaré apuntadores para obtener toda la información
+     * relevante para perros y gatos respectivamente. 
+     * @param
+     * @return
+     */
+    void mostrarAnimales(){
+        for (int i =0; i<100; i++){
+            if(animales[i]!= nullptr){
+                animales[i]-> mostrarInfo();
+            }    
+        }
+    }
 };
 
 #endif

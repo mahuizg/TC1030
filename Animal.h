@@ -6,7 +6,9 @@
 using namespace std;
 
 class Animal {
-protected: //Al ser la clase Animal la clase madre para Perro y Gato, sus atributos deben ser protegidos, de manera que las clases mencionadas anteriormente tengan acceso a dichos atributos. 
+protected: 
+//Declaro los atributos con modificador de acceso "protected", pues estos atributos
+//serán heredados por las subclases.  
     int id;
     string tipo;
     string nombre;
@@ -16,20 +18,14 @@ protected: //Al ser la clase Animal la clase madre para Perro y Gato, sus atribu
     string color;
 
 public:
-    Animal(int id_, string tipo_, string nombre_, int edad_, char sexo_, string raza_, string color_); //Declaro el constructor del objeto tipo Animal y que contiene todos los atributos que sí son compartidos por perros y gatos
-    int getId() { return id; }
-    string getTipo() { return tipo; }
-    string getNombre() { return nombre; }
-    int getEdad() { return edad; }
-    char getSexo() { return sexo; }
-    string getRaza() { return raza; }
-    string getColor() { return color; }
-    virtual void mostrarAnimales() = 0; //Igualo este método a 0, con la intención de declarar esta como mi clase abstracta
-    //De igual manera, uso virtual en este método para poder emplear sobreescritura de métodos más adelante
-     
+    Animal(int id_, string tipo_, string nombre_, int edad_, char sexo_,
+    string raza_, string color_); //Constructor de los objetos tipo Animal
+    virtual ~Animal(){};//Destructor para evitar warnings ligados a eliminarAnimal(indice)
+    virtual void mostrarInfo() = 0; //Método abstracto que se sobreescribirá
 };
 
-Animal::Animal(int id_, string tipo_, string nombre_, int edad_, char sexo_, string raza_, string color_){
+Animal::Animal(int id_, string tipo_, string nombre_, int edad_, char sexo_,
+string raza_, string color_){
     id = id_;
     tipo = tipo_;
     nombre = nombre_;
@@ -39,73 +35,101 @@ Animal::Animal(int id_, string tipo_, string nombre_, int edad_, char sexo_, str
     color = color_;
 }
 
-class Perro : public Animal { //Creo la clase Perro, la cual tiene una relación de herencia con la clase madre Animal
-private: //Debido a que estos atributos no deberán ser heredados por ninguna otra clase, serán declarados como privados.
+class Perro : public Animal { 
+//Creo la clase Perro que tiene una relación de herencia con la clase madre 
+private: //Privados pues no serán heredados por otra subclase
     string tamanio;
     bool entrenado;
     string entrenador;
 
 public:
-    //En los dos siguientes métodos, veremos dos constructores que lucen casi idénticos, pero el primero será utilizado para los perros que no estén entrenados. De ahí viene que la variable entrenado sea false
-    Perro(int id_, string tipo_, string nombre_, int edad_, char sexo_, string raza_, string color_, string tamanio_, bool entrenado_) : Animal(id_, tipo_, nombre_, edad_, sexo_, raza_, color_){
+    /**En los dos siguientes métodos veremos dos constructores que lucen
+     * casi idénticos, pero el primero será utilizado para los perros que
+     * no estén entrenados. De ahi viene que la variable entrenado sea false
+     */
+    Perro(int id_, string tipo_, string nombre_, int edad_, char sexo_, 
+    string raza_, string color_, string tamanio_, bool entrenado_) :
+    Animal(id_, tipo_, nombre_, edad_, sexo_, raza_, color_){
         tamanio = tamanio_;
         entrenado = false;
     }
-    //El siguiente constructor nos ayudará a crear objetos de tipo Perro pero que sí estén entrenados. Debido a esto, entrenado será true, y también usaremos otro atributo llamado "entrenador", el cual no tendría sentido que usara si llegara a crear perros no entrenados.
-    //La intención al tener dos distintos constructores para perro, es demostrar la competencia que involucra el uso de sobrecarga. 
-    Perro(int id_, string tipo_, string nombre_, int edad_, char sexo_, string raza_, string color_, string tamanio_, bool entrenado_, string entrenador_) : Animal(id_, tipo_, nombre_, edad_, sexo_, raza_, color_){
+
+    /**El siguiente constructor nos ayudará a crear objetos de tipo Perro
+     * pero que sí estén entrenados. Debido a esto, entrenado será true, y 
+     * también usaremos otro atributo llamado "entrenador". La intención al 
+     * tener dos distintos constructores para perro, es demostrar la
+     * competencia que involucra el uso de sobrecarga
+     */
+    Perro(int id_, string tipo_, string nombre_, int edad_, char sexo_, 
+    string raza_, string color_, string tamanio_, bool entrenado_, 
+    string entrenador_) : Animal(id_, tipo_, nombre_, edad_, sexo_, 
+    raza_, color_){
         tamanio = tamanio_;
         entrenado = true;
         entrenador = entrenador_;
     }
-    bool getEntrenado() { return entrenado; }
 
-    string getEntrenador() { return entrenador; }
-
-    void mostrarAnimales(){
-        for (int i = 0; animales.size(); i+1){
-            if (animales[i] != nullptr && animales[i]-> getTipo() == "Perro"){
-                cout << endl;
-                cout << "Número de ID: " << animales[i]->getId() << endl;
-                cout << "Nombre: " << animales[i]->getNombre()<< endl;
-                cout << "Tipo de animal: " << animales[i]->getTipo() << endl;
-                cout << "Edad: " << animales[i]->getEdad() << endl;
-                cout << "Sexo: " << animales[i]->getSexo() << endl;
-                cout << "Raza: " << animales[i]->getRaza() << endl;
-                cout << "Color: " << animales[i]->getColor() << endl;
-                cout << "Entrenado: " << perro->getEntrenado() << endl;
-                if (perro->getEntrenado == True){
-                    cout << "Entrenador: " << perro->getEntrenador() << endl;
-                }
-            }
+    /** La siguiente función involucrará sobreescritura.
+     * El objetivo de este método es imprimir todos los atributos de los
+     * objetos de tipo Perro.
+     * En este caso, no hay necesidad de usar getters, pues estoy accediendo
+     * a los atributos dentro de la clase Perro, entonces basta con escribir
+     * cout << "Atributo: " << atributo << endl; 
+     * De igual manera, habrá una condición que debe cumplirse para que
+     * también se imprima el atributo de entrenador. 
+     * @param
+     * @return
+     */
+    void mostrarInfo(){
+        cout << endl; 
+        cout << "ID: " << id << endl;
+        cout << "Tipo: " << tipo<< endl;
+        cout << "Nombre: " << nombre << endl; 
+        cout << "Edad: " << edad << endl; 
+        cout << "Sexo: " << sexo << endl; 
+        cout << "Raza: " << raza << endl; 
+        cout << "Color: " << color << endl; 
+        cout << "Tamaño: " << tamanio << endl; 
+        cout << "Entrenado: " << entrenado << endl; 
+        if (entrenado == true){
+            cout << "Entrenador/a: " << entrenador << endl;
         }
     }
 };
 
 class Gato : public Animal {
-private: //Declaro los atributos que pertenecen únicamente a los objetos de tipo Gato. 
+private: 
+//Declaro los atributos que pertenecen únicamente a los objetos de tipo Gato. 
     int independencia;
 
 public:
-    Gato(int id_, string tipo_, string nombre_, int edad_, char sexo_, string raza_, string color_, int independencia_) : Animal(id_, tipo_, nombre_, edad_, sexo_, raza_, color_){ //Constructor de los objetos de tipo Gato. 
+    /**El siguiente, será el constructor que utilizaré para crear objetos de
+     * tipo Gato y que utilizará diferentes atributos al constructor de Perro
+     */
+    Gato(int id_, string tipo_, string nombre_, int edad_, char sexo_, 
+    string raza_, string color_, int independencia_) : Animal(id_, 
+    tipo_, nombre_, edad_, sexo_, raza_, color_){ 
         independencia = independencia_;
     }
-    int getIndependencia() { return independencia; }
-    void mostrarAnimales(){
-        for (int i = 0; animales.size(); i+1){
-            if (animales[i] != nullptr && animales[i]-> getTipo() == "Gato"){
-                cout << endl;
-                cout << "Número de ID: " << animales[i]->getId() << endl;
-                cout << "Nombre: " << animales[i]->getNombre()<< endl;
-                cout << "Tipo de animal: " << animales[i]->getTipo() << endl;
-                cout << "Edad: " << animales[i]->getEdad() << endl;
-                cout << "Sexo: " << animales[i]->getSexo() << endl;
-                cout << "Raza: " << animales[i]->getRaza() << endl;
-                cout << "Color: " << animales[i]->getColor() << endl;
-                cout << "Nivel de Independencia: " << gato->getIndependencia() << endl;
-                }
-            }
-        }    
+    /**Nuevamente, este método nos servirá para imprimir la información de
+     * cada uno de los objetos de tipo Gato. Aunque tengan el mismo nombre, 
+     * este mostrarInfo() es distinto al que fue implementado en la clase
+     * Perro, pues como cuentan con diferentes atributos, también imprimiremos
+     * cosas diferentes. 
+     * @param
+     * @return
+     */
+    void mostrarInfo(){
+        cout << endl; 
+        cout << "ID: " << id << endl;
+        cout << "Tipo: " << tipo << endl;
+        cout << "Nombre: " << nombre << endl; 
+        cout << "Edad: " << edad << endl; 
+        cout << "Sexo: " << sexo << endl; 
+        cout << "Raza: " << raza << endl; 
+        cout << "Color: " << color << endl; 
+        cout << "Independencia (1-10): " << independencia << endl;       
+    }
 };
 
 #endif

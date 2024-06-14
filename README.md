@@ -26,5 +26,4 @@ g++ main.cpp -o main
 ## Referencias
 1. Ravikiran, A. S. (2023). _An Introduction to C++ Getline with Syntax And Examples_. Simplilearn. Recuperado el 12 de junio del 2024, de: https://www.simplilearn.com/tutorials/cpp-tutorial/cpp-getline#:~:text=Example%3A%20Using%20cin%20Object&text=That's%20because%20the%20compiler%20stopped,to%20use%20the%20getline%20function.
 2. Team Gyata. (2024). _Destructor C++_. GYATA AI. Recuperado el 13 de junio del 2024, de: https://www.gyata.ai/es/c-plus-plus/c-destructor/
-3. Javatpoint. (s.f.). _Dynamic Cast in C++_. Recuperado el 13 de junio del 2024, de: https://www.javatpoint.com/dynamic-cast-in-cpp
 

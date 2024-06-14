@@ -1,3 +1,15 @@
+/**
+ * Proyecto Refugio clase Refugio
+ * María José Zamora
+ * A01704264
+ * 14 de junio del 2024
+ * Versión 6
+ * Esta clase define el objeto de tipo Refugio, y que a su vez, contendrá
+ * los métodos necesarios para el funcionamiento del programa, como 
+ * eliminarAnimal(indice), registrarAnimal(parámetros), o mostrarAnimales()
+ */
+
+
 #ifndef REFUGIO_H
 #define REFUGIO_H
 #include "Animal.h"
